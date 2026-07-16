@@ -1,0 +1,47 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+		xmlns:common="using:MindFusion.UI.Avalonia"
+        xmlns:local="using:CloudDesigner"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        Width="1200" Height="800"
+        x:Class="CloudDesigner.MainWindow"
+        Title="Cloud Infrastructure Designer">
+
+	<Grid RowDefinitions="*, Auto">
+		<Grid Grid.Row="0" ColumnDefinitions="200, *, 250">
+			
+			<!-- Column 0: Palette -->
+			<diag:Palette x:Name="palette" Grid.Column="0" BorderBrush="#7E7E7E" BorderThickness="0,0,1,0" />
+
+			<!-- Column 1: Ruler + DiagramView -->
+			<diag:Ruler x:Name="ruler" Grid.Column="1" ShowIcon="False">
+				<diag:DiagramView x:Name="diagramView" DragDrop.AllowDrop="True" />
+			</diag:Ruler>
+
+			<!-- Column 2: Property Panel -->
+			<Border Grid.Column="2" Background="#F5F5F5" BorderBrush="LightGray" BorderThickness="1,0,0,0">
+                <StackPanel Margin="15" Spacing="10">
+                    <TextBlock Text="Properties" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+                    
+                    <TextBlock Text="Label" FontSize="12" Foreground="Gray" />
+                    <TextBox x:Name="txtTitle" />
+
+                    <TextBlock Text="Description" FontSize="12" Foreground="Gray" />
+                    <TextBox x:Name="txtDesc" AcceptsReturn="True" Height="100" />
+                </StackPanel>
+            </Border>
+		</Grid>
+
+		<Border Grid.Row="1" BorderThickness="1" BorderBrush="LightGray" Padding="10" Margin="10">
+            <StackPanel Orientation="Horizontal" Spacing="20">
+			    <TextBlock VerticalAlignment="Center" Text="Select a node to edit its properties. Drag from the palette to add new resources." />
+                <Button x:Name="btnArrange" Content="Arrange Layout" Padding="10,5" Background="DodgerBlue" Foreground="White" />
+                <Button x:Name="btnExport" Content="Export Image" Padding="10,5" Background="SeaGreen" Foreground="White" />
+            </StackPanel>
+		</Border>
+	</Grid>
+
+</Window>

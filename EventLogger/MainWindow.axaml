@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
+        Width="1024" Height="768"
+        x:Class="EventLogger.MainWindow"
+        Title="MindFusion.Diagramming Sample: Event Logger">
+
+	<Grid ColumnDefinitions="*, 255" RowDefinitions="*, 75">
+		<!-- Left: DiagramView -->
+		<diag:DiagramView x:Name="diagramView" Grid.Row="0" Grid.Column="0" />
+
+		<!-- Left bottom: Description -->
+		<Border Grid.Row="1" Grid.Column="0" Margin="5" Name="border1" BorderBrush="DimGray" BorderThickness="1" Padding="10">
+			<TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
+				This sample lets you find out what MindFusion.Diagramming events are raised while the user interacts with the diagram. If you wonder what event is raised in response to a user's action, carry out that action in the diagram and watch out the event names that appear in the list on the right.
+			</TextBlock>
+		</Border>
+
+		<!-- Right: Logging controls -->
+		<Grid Grid.Column="1" Grid.RowSpan="2" RowDefinitions="*, Auto, Auto, Auto, Auto, Auto" Margin="5">
+			<!-- Event List -->
+			<ListBox x:Name="listBox1" Margin="0,0,0,10" />
+
+			<!-- Event Logging Options -->
+			<CheckBox x:Name="checkBox1" Grid.Row="1" Margin="0,0,0,5" Content="Log mouse events" />
+			<CheckBox x:Name="checkBox2" Grid.Row="2" Margin="0,0,0,10" Content="Log paint events" />
+
+			<!-- Actions -->
+			<Button x:Name="button1" Grid.Row="3" Margin="0,0,0,5" Click="button1_Click" Content="Clear Log" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+			<Button x:Name="button2" Grid.Row="4" Margin="0,0,0,5" Click="OnSave" Content="Save to XML" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+			<Button x:Name="button3" Grid.Row="5" Click="OnLoad" Content="Load from XML" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+		</Grid>
+	</Grid>
+
+</Window>

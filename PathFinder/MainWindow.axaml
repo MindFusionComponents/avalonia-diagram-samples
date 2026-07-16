@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
+        Width="1024" Height="768"
+        x:Class="PathFinderSample.MainWindow"
+        Title="MindFusion.Diagramming Sample: Path Finder">
+
+	<Grid RowDefinitions="Auto, *, Auto">
+		<!-- Top Control Bar -->
+		<StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" VerticalAlignment="Center">
+			<Button Content="Random graph" Click="OnRandomGraph" Margin="0,0,20,0" Padding="10,5" />
+
+			<RadioButton x:Name="shortestPathRadio" Content="Shortest path" GroupName="path" IsChecked="True" Margin="0,0,20,0" />
+			<RadioButton x:Name="longestPathRadio" Content="Longest path" GroupName="path" />
+		</StackPanel>
+
+		<diag:DiagramView x:Name="diagramView" Grid.Row="1" />
+
+		<!-- Bottom: Description TextBlock -->
+		<Border Grid.Row="2" BorderThickness="1" BorderBrush="LightGray" Padding="10" Margin="10">
+			<TextBlock TextWrapping="Wrap">
+				Click on two connected Shape nodes to trace the shortest or longest path between them. An animation will trace the route through the selected path.
+			</TextBlock>
+		</Border>
+	</Grid>
+
+</Window>

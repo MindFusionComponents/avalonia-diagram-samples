@@ -1,0 +1,19 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        x:Class="MinApp.MainWindow"
+        Title="MindFusion.Diagramming sample: Minimal Application">
+
+	<Grid RowDefinitions="*, Auto">
+		<diag:DiagramView x:Name="diagramView" />
+	
+		<TextBlock Grid.Row="1">
+		This example demonstrates the minimal setup that lets you display 
+		the DiagramView component in an Avalonia UI Window. 
+		</TextBlock>
+	</Grid>
+
+</Window>

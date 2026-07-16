@@ -1,0 +1,22 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
+        Width="800" Height="600"
+        x:Class="Tutorial1.MainWindow"
+        Title="MindFusion.Diagramming Sample: Tutorial 1">
+
+	<Grid RowDefinitions="*, Auto">
+		<diag:DiagramView x:Name="diagramView" Grid.Row="0" />
+
+		<!-- Bottom: Description TextBlock -->
+		<Border Grid.Row="1" BorderThickness="1" BorderBrush="LightGray" Padding="10" Margin="10">
+			<TextBlock TextWrapping="Wrap">
+				This tutorial demonstrates how to build a diagram dynamically from an XML file and arrange it using the LayeredLayout algorithm.
+			</TextBlock>
+		</Border>
+	</Grid>
+
+</Window>

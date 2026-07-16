@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
+        Width="800" Height="600"
+        x:Class="AnchorPoints.MainWindow"
+        Title="MindFusion.Diagramming Sample: Anchor Points">
+
+	<Grid RowDefinitions="*, Auto">
+		<diag:DiagramView x:Name="diagramView" Grid.Row="0" />
+
+		<Grid Grid.Row="1" ColumnDefinitions="*, Auto, Auto" Margin="10">
+			<Border BorderBrush="Gray" BorderThickness="1" Padding="10">
+				<TextBlock TextWrapping="Wrap">
+					This sample shows how to define custom anchor-point patterns and assign them to nodes. There are also several predefined anchor patterns to choose from. One of them, DecisionBox, is used with the decision nodes in the sample diagram on the left. Link several nodes with arrows to get an idea how anchor points work.
+				</TextBlock>
+			</Border>
+			
+			<Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="10,0,10,0" Padding="10">
+				<StackPanel Orientation="Vertical">
+					<TextBlock FontWeight="Bold" Margin="0,0,0,5">Box shape</TextBlock>
+					<RadioButton Margin="0,0,0,5" Name="radioButton1" IsCheckedChanged="OnRadio1Checked" Content="Node" />
+					<RadioButton Name="radioButton2" IsCheckedChanged="OnRadio2Checked" Content="Decision" />
+				</StackPanel>
+			</Border>
+
+			<StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
+				<Button Name="loadXmlBtn" Click="OnLoadClick" Margin="2" Content="Load XML" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+				<Button Name="saveXmlBtn" Click="OnSaveClick" Margin="2" Content="Save XML" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+			</StackPanel>
+		</Grid>
+	</Grid>
+
+</Window>

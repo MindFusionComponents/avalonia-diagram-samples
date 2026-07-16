@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d"
+        Width="800" Height="600"
+        x:Class="SequenceDiagram.MainWindow"
+        Title="MindFusion.Diagramming Sample: Sequence Diagram">
+
+	<Grid RowDefinitions="*, Auto">
+		<Grid Grid.Row="0" ColumnDefinitions="*, 150">
+			<diag:DiagramView
+				x:Name="diagramView"
+				Behavior="DrawLinks"
+				ModificationStart="AutoHandles"
+				InplaceEditAcceptOnEnter="True"
+				DragDrop.AllowDrop="True"
+				DragDrop.DragOver="OnDragOver" />
+
+			<diag:ItemListView x:Name="itemListView" Grid.Column="1" />
+		</Grid>
+		
+		<Border Grid.Row="1" BorderThickness="1" BorderBrush="LightGray" Padding="10">
+			<TextBlock TextWrapping="Wrap">
+				This sample shows how to define custom node shapes and let users draw a sequence diagram.
+			</TextBlock>
+		</Border>
+	</Grid>
+
+</Window>

@@ -1,0 +1,41 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:Tutorial3"
+             x:Class="Tutorial3.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.Styles>
+        <FluentTheme />
+        
+        <Style Selector="local|OrgChartNode">
+            <Setter Property="Template">
+                <DataTemplate DataType="local:OrgChartNode">
+                    <Grid Width="{Binding Bounds.Width}" Height="{Binding Bounds.Height}">
+                        <!-- Background rectangle -->
+                        <Rectangle
+                            Stroke="{Binding Stroke}"
+                            StrokeThickness="{Binding StrokeThickness}"
+                            Fill="{Binding Brush}" />
+
+                        <Grid ColumnDefinitions="80, *">
+                            <!-- Image -->
+                            <Image
+                                Source="{Binding Image}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Stretch="Uniform" />
+
+                            <!-- Text fields -->
+                            <StackPanel Grid.Column="1" Margin="4,8,0,0" >
+                                <TextBlock Text="{Binding Title}" FontWeight="800" FontSize="14" />
+                                <TextBlock Text="{Binding FullName}" Foreground="Blue" FontSize="12" />
+                                <TextBlock Text="{Binding Text}" FontSize="11" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </Setter>
+        </Style>
+    </Application.Styles>
+</Application>

@@ -1,0 +1,32 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
+        Width="800" Height="600"
+        x:Class="LayeredLayout.MainWindow"
+        Title="MindFusion.Diagramming Sample: Layered Layout">
+
+	<Grid RowDefinitions="*, Auto">
+		<diag:DiagramView
+			x:Name="diagramView"
+			Grid.Row="0" />
+
+		<Grid Grid.Row="1" ColumnDefinitions="Auto, *" Margin="10">
+			<Button Content="Random graph"
+					Click="button_Click"
+					Width="120" Height="60"
+					HorizontalContentAlignment="Center"
+					VerticalContentAlignment="Center"
+					Margin="0,0,10,0" />
+
+			<Border Grid.Column="1" BorderThickness="1" BorderBrush="LightGray" Padding="10">
+				<TextBlock TextWrapping="Wrap" VerticalAlignment="Center">
+					This example demonstrates the LayeredLayout graph layout algorithm. Click the button to generate a random graph and arrange it.
+				</TextBlock>
+			</Border>
+		</Grid>
+	</Grid>
+
+</Window>

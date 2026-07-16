@@ -1,0 +1,21 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        Width="800" Height="600"
+        x:Class="FreeForm.MainWindow"
+        Title="MindFusion.Diagramming Sample: Free-Form Drawing">
+
+	<Grid RowDefinitions="*, Auto">
+		<diag:DiagramView x:Name="diagramView" Behavior="DrawFreeShapes" Grid.Row="0" />
+	
+		<Border Grid.Row="1" BorderThickness="1" BorderBrush="LightGray" Padding="10" Margin="10">
+			<TextBlock TextWrapping="Wrap">
+				Draw ellipse, rectangle or diamond shape outlines to automatically convert them to ShapeNode objects.
+			</TextBlock>
+		</Border>
+	</Grid>
+
+</Window>

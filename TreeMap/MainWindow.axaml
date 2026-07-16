@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
+        Width="1024" Height="768"
+        x:Class="TreeMap.MainWindow"
+        Title="MindFusion.Diagramming Sample: Tree Map">
+
+	<Grid RowDefinitions="Auto, *, Auto">
+		<!-- Top Controls Bar -->
+		<Grid Grid.Row="0" ColumnDefinitions="Auto, Auto, Auto, Auto, *, Auto" Margin="10" VerticalAlignment="Center">
+			<TextBlock Grid.Column="0" Text="Weigh by: " VerticalAlignment="Center" Margin="0,0,5,0" />
+			<ComboBox Grid.Column="1" x:Name="weightComboBox" SelectionChanged="OnWeightSelectionChanged" SelectedIndex="1" Width="120" Margin="0,0,20,0">
+				<ComboBoxItem Content="Population" />
+				<ComboBoxItem Content="Area" />
+			</ComboBox>
+
+			<TextBlock Grid.Column="2" Text="Color by: " VerticalAlignment="Center" Margin="0,0,5,0" />
+			<ComboBox Grid.Column="3" x:Name="colorComboBox" SelectionChanged="OnColorSelectionChanged" SelectedIndex="0" Width="120" Margin="0,0,20,0">
+				<ComboBoxItem Content="Population" />
+				<ComboBoxItem Content="Area" />
+			</ComboBox>
+
+			<!-- Legend -->
+			<StackPanel Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Center">
+				<TextBlock Text="High " VerticalAlignment="Center" />
+				<Border Width="100" Height="20" BorderBrush="Black" BorderThickness="1">
+					<Border.Background>
+						<LinearGradientBrush StartPoint="0%,50%" EndPoint="100%,50%">
+							<GradientStop Color="rgb(206, 0, 0)" Offset="0" />
+							<GradientStop Color="rgb(97, 106, 127)" Offset="0.5" />
+							<GradientStop Color="rgb(224, 233, 233)" Offset="1" />
+						</LinearGradientBrush>
+					</Border.Background>
+				</Border>
+				<TextBlock Text=" Low" VerticalAlignment="Center" />
+			</StackPanel>
+		</Grid>
+
+		<diag:DiagramView x:Name="diagramView" Grid.Row="1" />
+
+		<!-- Bottom: Description TextBlock -->
+		<Border Grid.Row="2" BorderThickness="1" BorderBrush="LightGray" Padding="10" Margin="10">
+			<TextBlock TextWrapping="Wrap">
+				This sample shows how to arrange the Diagram by using the TreeMapLayout algorithm. Choose different options to assign weights and note how the layout changes.
+			</TextBlock>
+		</Border>
+	</Grid>
+
+</Window>

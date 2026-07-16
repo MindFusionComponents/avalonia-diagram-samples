@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+		xmlns:common="using:MindFusion.UI.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768"
+        Width="1024" Height="768"
+        x:Class="Controls.MainWindow"
+        Title="MindFusion.Diagramming Sample: Controls">
+
+	<Grid RowDefinitions="*, Auto">
+		<Grid Grid.Row="0" ColumnDefinitions="*, 200">
+			<!-- Column 0: Ruler + DiagramView + ZoomControl -->
+			<Grid>
+				<diag:Ruler x:Name="ruler" ShowIcon="False">
+					<diag:DiagramView x:Name="diagramView" DragDrop.AllowDrop="True" />
+				</diag:Ruler>
+
+				<common:ZoomControl
+					x:Name="zoomControl"
+					ScrollStep="40"
+					MinZoomFactor="10"
+					Height="350"
+					VerticalAlignment="Top"
+					Width="50"
+					HorizontalAlignment="Left"
+					ZIndex="1"
+					Margin="30,30,0,0" />
+			</Grid>
+
+			<!-- Column 1: Palette (top) and Overview (bottom) -->
+			<Grid Grid.Column="1" RowDefinitions="*, 200">
+				<diag:Palette x:Name="palette" Grid.Row="0" />
+				
+				<Border Grid.Row="1" BorderBrush="#7E7E7E" BorderThickness="0,1,0,0">
+					<diag:Overview x:Name="overview" DimBrush="Transparent" />
+				</Border>
+			</Grid>
+		</Grid>
+
+		<!-- Bottom: Description TextBlock -->
+		<Border Grid.Row="1" BorderThickness="1" BorderBrush="LightGray" Padding="10" Margin="10">
+			<TextBlock TextWrapping="Wrap">
+				This sample demonstrates some of the auxilliary controls available with MindFusion Diagramming for Avalonia: Palette, Overview and Ruler. The Palette represents a tool palette control that displays DiagramItem objects grouped into categories, which can be added to a diagram by drag-and-drop. The Overview provides a scaled-down view of the DiagramView content and lets the user scroll the bound view. The Ruler provides horizontal and vertical scales that help users measure and align diagram items.
+			</TextBlock>
+		</Border>
+	</Grid>
+
+</Window>

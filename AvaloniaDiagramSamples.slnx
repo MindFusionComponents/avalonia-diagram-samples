@@ -1,0 +1,21 @@
+<Solution>
+  <Project Path="AnchorPoints/AnchorPoints.csproj" />
+  <Project Path="CloudDesigner/CloudDesigner.csproj" />
+  <Project Path="Containers/Containers.csproj" />
+  <Project Path="Controls/Controls.csproj" />
+  <Project Path="EventLogger/EventLogger.csproj" />
+  <Project Path="FractalLayout/FractalLayout.csproj" />
+  <Project Path="FreeForm/FreeForm.csproj" />
+  <Project Path="Inheritance/Inheritance.csproj" />
+  <Project Path="LayeredLayout/LayeredLayout.csproj" />
+  <Project Path="MinApp/MinApp.csproj" />
+  <Project Path="PathFinder/PathFinder.csproj" />
+  <Project Path="SequenceDiagram/SequenceDiagram.csproj" />
+  <Project Path="SpanningCells/SpanningCells.csproj" />
+  <Project Path="StockShapes/StockShapes.csproj" />
+  <Project Path="StressTest/StressTest.csproj" />
+  <Project Path="TreeMap/TreeMap.csproj" />
+  <Project Path="Tutorial1/Tutorial1.csproj" />
+  <Project Path="Tutorial2/Tutorial2.csproj" />
+  <Project Path="Tutorial3/Tutorial3.csproj" />
+</Solution>

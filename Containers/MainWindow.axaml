@@ -1,0 +1,22 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        Width="800" Height="600"
+        x:Class="Containers.MainWindow"
+        Title="MindFusion.Diagramming Sample: Containers">
+
+	<Grid RowDefinitions="*, Auto">
+		<diag:DiagramView x:Name="diagramView" Grid.Row="0" />
+
+		<!-- Bottom: Description TextBlock -->
+		<Border Grid.Row="1" BorderThickness="1" BorderBrush="LightGray" Padding="10" Margin="10">
+			<TextBlock TextWrapping="Wrap">
+				This example demonstrates how to set up ContainerNode objects and add child nodes to them.
+			</TextBlock>
+		</Border>
+	</Grid>
+
+</Window>
