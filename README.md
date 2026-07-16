@@ -6,7 +6,8 @@ This repository contains a comprehensive collection of sample applications for t
 The newest addition to our collection, demonstrating a professional-grade architecture tool.
 - **Location**: `/CloudDesigner`
 - **Highlights**: SVG icon integration, hierarchical containers (VPCs/Subnets), grid snapping, and professional PNG export.
-- ![Cloud Designer Preview](CloudDesigner/sample.png)
+
+![Cloud Designer Preview](CloudDesigner/sample.png)
 
 ## 📂 Samples Overview
 
