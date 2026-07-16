@@ -54,7 +54,7 @@ Step-by-step guides to get you started with the library.
    ```
 
 ## About 
-These samples are provided as-is for demonstration purposes. Use of the MindFusion.Diagramming library is subject to the [MindFusion License Agreement](https://mindfusion.eu/license.html).
+These samples are provided as-is for demonstration purposes. Use of the MindFusion.Diagramming library is subject to the [MindFusion License Agreement](https://mindfusion.eu/eula.html).
 
 ---
 *For more information, visit the [MindFusion Avalonia Product Page](https://mindfusion.eu/avalonia-diagram.html).*
