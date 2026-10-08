@@ -1,0 +1,214 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:diag="using:MindFusion.Diagramming.Avalonia"
+        xmlns:local="using:MinApp"
+        mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="900"
+        x:Class="MinApp.MainWindow"
+        Title="Shop DB - ER Schema Visualizer"
+        Width="1440" Height="900"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Styles>
+        <Style Selector="Button.toolbarBtn">
+            <Setter Property="Padding" Value="10,6" />
+            <Setter Property="Margin" Value="2,0" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+        <Style Selector="TextBlock.sectionHeader">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="#475569" />
+            <Setter Property="Margin" Value="6,8,6,4" />
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- TOP TOOLBAR -->
+        <Border Grid.Row="0" Background="#F8FAFC" BorderBrush="#CBD5E1" BorderThickness="0,0,0,1" Padding="10,6">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <!-- Branding -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Spacing="8">
+                    <Border Background="#2563EB" CornerRadius="6" Padding="6,4">
+                        <TextBlock Text="ER" Foreground="White" FontWeight="Black" FontSize="13" />
+                    </Border>
+                    <TextBlock Text="Shop Database ER Schema" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Foreground="#0F172A" />
+                    <Border Background="#E2E8F0" CornerRadius="4" Padding="6,2" VerticalAlignment="Center">
+                        <TextBlock x:Name="txtDbNameBadge" Text="shop.db" FontSize="11" Foreground="#475569" FontWeight="Medium" />
+                    </Border>
+                </StackPanel>
+
+                <!-- Actions -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Spacing="4">
+                    <Button x:Name="btnLayout" Classes="toolbarBtn" Background="#E0E7FF" Foreground="#3730A3" Content="Arrange Diagram" Click="OnArrangeDiagram" ToolTip.Tip="Re-arrange diagram with OrthogonalLayout" />
+                    <Button x:Name="btnRoute" Classes="toolbarBtn" Content="Route Links" Click="OnRouteLinksClicked" ToolTip.Tip="Re-route relationship links orthogonally" />
+                     <Separator Width="1" Margin="4,2" Background="#CBD5E1" />
+                    <Button x:Name="btnZoomFit" Classes="toolbarBtn" Content="Fit All" Click="OnZoomToFitClicked" ToolTip.Tip="Fit entire schema into view" />
+                    <Button x:Name="btnZoom100" Classes="toolbarBtn" Content="100%" Click="OnZoom100Clicked" ToolTip.Tip="Reset zoom to 100%" />
+                    <Button x:Name="btnZoomIn" Classes="toolbarBtn" Content="+" Click="OnZoomInClicked" ToolTip.Tip="Zoom In" Width="30" HorizontalContentAlignment="Center" />
+                    <Button x:Name="btnZoomOut" Classes="toolbarBtn" Content="-" Click="OnZoomOutClicked" ToolTip.Tip="Zoom Out" Width="30" HorizontalContentAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- MAIN 3-PANE WORKSPACE -->
+        <Grid Grid.Row="1" ColumnDefinitions="240,4,*,4,300">
+            <!-- LEFT PANEL: NodeListView & Table Directory -->
+            <Border Grid.Column="0" Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="0,0,1,0">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
+                    <!-- Palette Title -->
+                    <TextBlock Grid.Row="0" Text="TOOLBOX (DRAG &amp; DROP)" Classes="sectionHeader" />
+                    
+                    <!-- NodeListView (ItemListView subclass) -->
+                    <Border Grid.Row="1" Margin="6,2,6,6" Background="White" BorderBrush="#CBD5E1" BorderThickness="1" CornerRadius="4">
+                        <local:NodeListView x:Name="nodeListView" Height="220" Background="Transparent" />
+                    </Border>
+
+                    <!-- Table Directory Title -->
+                    <TextBlock Grid.Row="2" Text="DATABASE TABLES" Classes="sectionHeader" Margin="6,8,6,4" />
+
+                    <!-- Filter Box -->
+                    <TextBox Grid.Row="3" x:Name="txtSearchTable" PlaceholderText="Search tables..." Margin="6,0,6,6" TextChanged="OnSearchTextChanged" />
+
+                    <!-- Tables List -->
+                    <ListBox Grid.Row="4" x:Name="lstTables" Margin="6,0,6,6" Background="White" BorderBrush="#CBD5E1" BorderThickness="1" CornerRadius="4" SelectionChanged="OnTableSelected">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="local:TableListItem">
+                                <Grid ColumnDefinitions="*,Auto" Margin="2">
+                                    <TextBlock Grid.Column="0" Text="{Binding Name}" FontWeight="Medium" VerticalAlignment="Center" />
+                                    <Border Grid.Column="1" Background="{Binding DomainBackground}" CornerRadius="3" Padding="4,1" Margin="4,0,0,0">
+                                        <TextBlock Text="{Binding Domain}" FontSize="10" Foreground="White" FontWeight="SemiBold" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+
+            <!-- LEFT SPLITTER -->
+            <GridSplitter Grid.Column="1" Background="#E2E8F0" ResizeDirection="Columns" />
+
+            <!-- CENTER PANEL: DiagramView -->
+            <Grid Grid.Column="2" Background="#FAFAFA">
+                <diag:DiagramView x:Name="diagramView" DragDrop.AllowDrop="True" />
+            </Grid>
+
+            <!-- RIGHT SPLITTER -->
+            <GridSplitter Grid.Column="3" Background="#E2E8F0" ResizeDirection="Columns" />
+
+            <!-- RIGHT PANEL: Overview & Inspector -->
+            <Border Grid.Column="4" Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1,0,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Spacing="8" Margin="8">
+                        <!-- Overview Header -->
+                        <TextBlock Text="OVERVIEW / MINIMAP" Classes="sectionHeader" Margin="0,4,0,0" />
+
+                        <!-- Overview Control -->
+                        <Border Background="White" BorderBrush="#CBD5E1" BorderThickness="1" CornerRadius="4" Height="220" ClipToBounds="True">
+                            <diag:Overview x:Name="overview" />
+                        </Border>
+
+                        <!-- Schema Summary Metrics -->
+                        <TextBlock Text="SCHEMA METRICS" Classes="sectionHeader" Margin="0,8,0,0" />
+                        <Grid ColumnDefinitions="*,*,*" Margin="0,2">
+                            <Border Grid.Column="0" Background="White" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="4" Padding="6,8" Margin="0,0,3,0">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock x:Name="txtMetricTables" Text="13" FontWeight="Black" FontSize="18" HorizontalAlignment="Center" Foreground="#2563EB" />
+                                    <TextBlock Text="Tables" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="1" Background="White" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="4" Padding="6,8" Margin="3,0,3,0">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock x:Name="txtMetricRelations" Text="15" FontWeight="Black" FontSize="18" HorizontalAlignment="Center" Foreground="#059669" />
+                                    <TextBlock Text="Relations" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="2" Background="White" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="4" Padding="6,8" Margin="3,0,0,0">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock x:Name="txtMetricDomains" Text="4" FontWeight="Black" FontSize="18" HorizontalAlignment="Center" Foreground="#7C3AED" />
+                                    <TextBlock Text="Domains" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <!-- Domain Group Legend -->
+                        <TextBlock Text="DOMAIN GROUPS" Classes="sectionHeader" Margin="0,6,0,0" />
+                        <StackPanel Spacing="4">
+                            <Border Background="#ECFDF5" BorderBrush="#10B981" BorderThickness="1" CornerRadius="4" Padding="8,4">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Grid.Column="0" Text="Sales Domain" Foreground="#065F46" FontWeight="Bold" FontSize="11" />
+                                    <TextBlock Grid.Column="1" Text="4 Tables" Foreground="#047857" FontSize="11" />
+                                </Grid>
+                            </Border>
+                            <Border Background="#EFF6FF" BorderBrush="#3B82F6" BorderThickness="1" CornerRadius="4" Padding="8,4">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Grid.Column="0" Text="Customers Domain" Foreground="#1E40AF" FontWeight="Bold" FontSize="11" />
+                                    <TextBlock Grid.Column="1" Text="4 Tables" Foreground="#1D4ED8" FontSize="11" />
+                                </Grid>
+                            </Border>
+                            <Border Background="#FFFBEB" BorderBrush="#F59E0B" BorderThickness="1" CornerRadius="4" Padding="8,4">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Grid.Column="0" Text="Catalog Domain" Foreground="#92400E" FontWeight="Bold" FontSize="11" />
+                                    <TextBlock Grid.Column="1" Text="3 Tables" Foreground="#B45309" FontSize="11" />
+                                </Grid>
+                            </Border>
+                            <Border Background="#F5F3FF" BorderBrush="#8B5CF6" BorderThickness="1" CornerRadius="4" Padding="8,4">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Grid.Column="0" Text="Inventory Domain" Foreground="#5B21B6" FontWeight="Bold" FontSize="11" />
+                                    <TextBlock Grid.Column="1" Text="2 Tables" Foreground="#6D28D9" FontSize="11" />
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Item Inspector -->
+                        <TextBlock Text="ITEM INSPECTOR" Classes="sectionHeader" Margin="0,8,0,0" />
+                        <Border Background="White" BorderBrush="#CBD5E1" BorderThickness="1" CornerRadius="4" Padding="8">
+                            <StackPanel Spacing="6">
+                                <TextBlock x:Name="txtInspectorTitle" Text="Click a table, domain, or link" FontWeight="Bold" FontSize="13" Foreground="#1E293B" TextWrapping="Wrap" />
+                                <TextBlock x:Name="txtInspectorSubtitle" Text="Details will appear here" FontSize="11" Foreground="#64748B" TextWrapping="Wrap" />
+                                <Separator Background="#E2E8F0" Height="1" />
+                                <ItemsControl x:Name="icInspectorDetails">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="local:InspectorRowItem">
+                                            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,2">
+                                                <TextBlock Grid.Column="0" Text="{Binding KeyTag}" FontWeight="Bold" Foreground="{Binding KeyColor}" Width="45" FontSize="10" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="1" Text="{Binding ColumnName}" FontSize="11" FontWeight="Medium" Foreground="#1E293B" VerticalAlignment="Center" />
+                                                <TextBlock Grid.Column="2" Text="{Binding DataType}" FontSize="10" Foreground="#64748B" VerticalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- STATUS BAR -->
+        <Border Grid.Row="2" Background="#F1F5F9" BorderBrush="#CBD5E1" BorderThickness="0,1,0,0" Padding="10,4">
+            <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                    <TextBlock Text="Database:" FontSize="11" Foreground="#64748B" />
+                    <TextBlock x:Name="txtStatusDb" Text="shop.db" FontSize="11" FontWeight="SemiBold" Foreground="#0F172A" />
+                    <TextBlock Text="•" Foreground="#94A3B8" />
+                    <TextBlock x:Name="txtStatusCounts" Text="13 Tables, 15 Relations" FontSize="11" Foreground="#475569" />
+                </StackPanel>
+
+                <TextBlock Grid.Column="1" Text="Drag nodes from left palette • Drag container headers to move domain • Middle-mouse to pan • Scroll to zoom" 
+                           FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <TextBlock Text="Layout: Orthogonal" FontSize="11" Foreground="#059669" FontWeight="Medium" />
+                    <TextBlock Text="•" Foreground="#94A3B8" />
+                    <TextBlock x:Name="txtStatusZoom" Text="Zoom: 100%" FontSize="11" Foreground="#475569" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+
+</Window>

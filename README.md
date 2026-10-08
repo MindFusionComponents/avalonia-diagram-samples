@@ -2,7 +2,27 @@
 
 This repository contains a comprehensive collection of sample applications for the **MindFusion.Diagramming for Avalonia** library. These samples demonstrate everything from basic diagram creation to advanced features like automatic layouts, custom styling, and complex infrastructure design.
 
-## Featured Sample: Cloud Infrastructure Designer
+## Featured Sample: Database ER Schema Visualizer
+
+An interactive Entity-Relationship (ER) diagram application built with **Avalonia UI** and **MindFusion.Diagramming for Avalonia**, dynamically visualizing the schema of a SQLite database (`shop.db`).
+
+### Key Features
+
+- **Dynamic Schema Extraction**: Automatically reads tables, columns, data types, primary keys, and foreign keys directly from SQLite.
+- **TableNode Representations**: Each database table is rendered as an ER table node with domain color-coding, `PK` / `FK` key indicators, and row-level relationship connection anchors.
+- **Domain Container Groups**: Tables belonging to related domains (*Sales*, *Customers*, *Catalog*, *Inventory*) are grouped inside foldable `ContainerNode`s.
+- **Dual Graph Layouts**:
+- **Orthogonal Layout**: Balanced, compact arrangement preserving container boundaries.
+- **Layered Layout**: Hierarchical dependency-flow layout respecting foreign-key chains.
+- **Link Routing**: Cascading orthogonal relationship lines routed around table nodes and container walls.
+- **3-Pane Workspace**:
+- **Left**: `NodeListView` tool palette for drag-and-drop diagramming + searchable table directory with instant click-to-focus.
+- **Center**: Interactive `DiagramView` canvas with grid points, smooth middle-click panning, and wheel zooming.
+- **Right**: Real-time `Overview` minimap, schema metrics, and an element inspector for tables, columns, containers, and foreign-key links.
+
+![ER Diagram Application](ERDiagramApp/schema.jpeg)
+
+## Sample: Cloud Infrastructure Designer
 The newest addition to our collection, demonstrating a professional-grade architecture tool.
 - **Location**: `/CloudDesigner`
 - **Highlights**: SVG icon integration, hierarchical containers (VPCs/Subnets), grid snapping, and professional PNG export.
